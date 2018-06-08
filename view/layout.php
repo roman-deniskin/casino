@@ -38,7 +38,7 @@ header("Pragma: no-cache");
   </div>
     <div class="content_container">
 <?php
-$content .= require_once $page['viewUri'];
+$content .= \View_resolver\View_resolver::getPageContent();
 ?>
     </div>
     </div><!-- page wrapper -->

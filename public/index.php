@@ -1,3 +1,3 @@
 <?php
-spl_autoload_register();
-use \vendor\core\Aapplication\Application;
+
+require_once "../Bootstrap.php";//Передаём управление автозагрузчику

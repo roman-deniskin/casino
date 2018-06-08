@@ -1,44 +1,41 @@
 <?php
-class routesConfig {
-	private $projectPageConfig = [
-		'/' => [
-			'viewUri' => '../view/pages/index.phtml'
-		],
-	];
-	
-	public static function getPageConfig () {
-		return $self::projectPageConfig;
-	}
-}
+namespace View_resolver;
 
-class viewResolver {
-	private $requestUri;
-	private $projectPageConfig;
-	private $viewModel;
-	
-	public function __construct {
-		$self::requestUri = $_SERVER['REQUEST_URI'];
-		$self::projectPageConfig = routesConfig::getPageConfig();
-		$self::getPage();
+class View_resolver {
+	static private $requestUri;
+    static private $projectPageConfig = [];
+    static private $viewModel;
+    static private $layout;
+
+	public function __construct() {
+		self::$requestUri = $_SERVER['REQUEST_URI'];
+		self::$projectPageConfig = new Routes_config;
+        self::getViewModel();
 	}
 	
 	public static function getViewModel() {
-		$self::viewModel = $projectPageConfig[$self::requestUri];
-		if (empty($self::viewModel)) {
-			$self::viewModel = [
+		self::$viewModel = self::$projectPageConfig->getPageConfig(self::$requestUri);
+		if (empty(self::$viewModel)) {
+			self::$viewModel = [
 				'viewUri' => '../view/pages/404.phtml'
 			];
 		}
 	}
 	
-	public static function getController() {
-		
+	public static function setLayout($layout) {
+        self::$layout ? $layout : '../view/layout.php';
 	}
-	
 
-$layout = '../view/layout.php';
+    public function getPageContent() {
+        return require_once self::$viewModel['viewUri'];
+    }
 
-$vm = require_once '../view/layout.php';//Çàäà¸ì øàáëîí
-$page = require_once $page['viewUri'];//ïåğåäà¸ì âüş
-echo $vm;
+    public static function renderer() {
+        $vm = require_once '../view/layout.php';
+        //require_once self::$viewModel['viewUri'];
+        echo $vm;
+    }
 }
+
+$vm = new View_resolver();
+$vm->renderer();
