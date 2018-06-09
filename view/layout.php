@@ -38,7 +38,7 @@ header("Pragma: no-cache");
   </div>
     <div class="content_container">
 <?php
-$content .= \View_resolver\View_resolver::getPageContent();
+$content .= \Route_resolver\Route_resolver::getPageContent();
 ?>
     </div>
     </div><!-- page wrapper -->

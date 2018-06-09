@@ -7,10 +7,10 @@
  */
 
 //Автозагрузчик классов объявляется в корне проекта, чтобы были доступны все классы проекта
-use View_resolver\View_resolver;
+use Route_resolver\Route_resolver;
 
 spl_autoload_register(function ($class_name) {
     require_once(str_replace('/', '\\', $class_name) . '.php');
 });
 
-View_resolver::renderer();
+Route_resolver::renderer();

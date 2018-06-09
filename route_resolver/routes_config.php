@@ -5,13 +5,16 @@
  * Date: 08.06.2018
  * Time: 1:37
  */
-namespace View_resolver;
+namespace Route_resolver;
 
 class Routes_config
 {
     private $projectPageConfig = [
         '/' => [
             'viewUri' => '../view/pages/index.phtml'
+        ],
+        '/auth' => [
+            'controller' => "Vendor/authentification/auth_controller::authentificate",
         ],
     ];
 
