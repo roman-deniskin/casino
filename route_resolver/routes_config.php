@@ -13,8 +13,15 @@ class Routes_config
         '/' => [
             'viewUri' => '../view/pages/index.phtml'
         ],
+        '/profile' => [
+            'controller' => \Controller\ProfilePageController\ProfilePageController::class,
+            'private_page' => true,
+        ],
         '/auth' => [
             'controller' => \Controller\AuthController\AuthController::class,
+        ],
+        '/logout' => [
+            'controller' => \Controller\AuthController\LogoutController::class,
         ],
     ];
 

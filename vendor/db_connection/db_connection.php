@@ -5,7 +5,7 @@ namespace Vendor\Db_connection;
 require_once "db.config.php";
 
 class Db_connection {
-    private $dbh;
+    protected $dbh;
     function __construct()
     {
         try {
@@ -17,7 +17,5 @@ class Db_connection {
             echo "Error!: " . $e->getMessage() . "<br/>";
             die();
         }
-
-        return $this->dbh;
     }
 }

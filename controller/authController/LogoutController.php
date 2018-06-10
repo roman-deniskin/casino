@@ -9,7 +9,7 @@ namespace Controller\AuthController;
 
 use Controller\BaseController\BaseController;
 
-class AuthController extends BaseController{
+class LogoutController extends BaseController{
     public function getViewUri() {
         return [
             'viewUri' => '../view/pages/404.phtml'
@@ -18,9 +18,8 @@ class AuthController extends BaseController{
 
     public function __invoke()
     {
-        $authFormData = $_POST;
         $authInstance = new \Vendor\Authentification\Authentification;
-        $authInstance->authentificate($authFormData);
+        $authInstance->logOut();
         return self::getViewUri();
     }
 }

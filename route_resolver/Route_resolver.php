@@ -12,10 +12,10 @@ class Route_resolver {
 	public function __construct() {
 		self::$requestUri = $_SERVER['REQUEST_URI'];
 		self::$projectPageConfig = new Routes_config;
-        self::getViewModel();
+        self::routeResolve();
 	}
 	
-	public static function getViewModel($routeParams = null) {
+	public static function routeResolve($routeParams = null) {
         if (empty($routeParams))
 		    self::$routeParams = self::$projectPageConfig->getPageConfig(self::$requestUri);
 		else {
@@ -26,7 +26,13 @@ class Route_resolver {
 				'viewUri' => '../view/pages/404.phtml'
 			];
 		} elseif (array_key_exists ('controller', self::$routeParams)) {
-            self::callController(self::$routeParams['controller']);
+            if (!array_key_exists('method', self::$routeParams))
+                self::callController(self::$routeParams['controller']);
+        }
+        $auth = new \Vendor\Authentification\Authentification;
+        $userAuth = $auth->checkAuthorize();
+        if ($userAuth == false && array_key_exists('private_page',self::$routeParams)) {
+            Header("Location: /");
         }
 	}
     
@@ -35,9 +41,8 @@ class Route_resolver {
             $controllerInstance = new self::$routeParams['controller']();//Каждый контроллер возвращает ViewConfig
         else
             $controllerInstance = new $controller();
-        $vm = $controllerInstance();
-        self::getViewModel($vm);
-        exit;
+        $routeParams = $controllerInstance();
+        self::routeResolve($routeParams);
     }
 	
 	public static function setLayout($layout) {
