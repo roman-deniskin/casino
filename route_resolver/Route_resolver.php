@@ -15,9 +15,13 @@ class Route_resolver {
         self::getViewModel();
 	}
 	
-	public static function getViewModel() {
-		self::$routeParams = self::$projectPageConfig->getPageConfig(self::$requestUri);
-		if (empty(self::$routeParams)) {
+	public static function getViewModel($routeParams = null) {
+        if (empty($routeParams))
+		    self::$routeParams = self::$projectPageConfig->getPageConfig(self::$requestUri);
+		else {
+            self::$routeParams = $routeParams;
+        }
+        if (empty(self::$routeParams)) {
 			self::$routeParams = [
 				'viewUri' => '../view/pages/404.phtml'
 			];
@@ -26,9 +30,13 @@ class Route_resolver {
         }
 	}
     
-    public static function callController(BaseController $controller) {
-        self::$routeParams = return new self::$routeParams['controller'];//Каждый контроллер возвращает ViewConfig
-        self::getViewModel();
+    public static function callController(/*BaseController*/ $controller = null) {
+        if ($controller == null)
+            $controllerInstance = new self::$routeParams['controller']();//Каждый контроллер возвращает ViewConfig
+        else
+            $controllerInstance = new $controller();
+        $vm = $controllerInstance();
+        self::getViewModel($vm);
         exit;
     }
 	

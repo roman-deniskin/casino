@@ -9,5 +9,7 @@
 namespace Controller\BaseController;
 
 abstract class BaseController {
-    abstract function getViewUri();
+    abstract function getViewUri();//Каждый контроллер обязан вернуть uri по которому скрипт пойдёт дальше.
+
+    abstract function __invoke();//Контроллер обязан реализовать метод __invoke как точку входа в контроллер
 }

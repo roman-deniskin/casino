@@ -14,7 +14,7 @@ class Routes_config
             'viewUri' => '../view/pages/index.phtml'
         ],
         '/auth' => [
-            'controller' => "Vendor/authentification/auth_controller::authentificate",
+            'controller' => \Controller\AuthController\AuthController::class,
         ],
     ];
 
