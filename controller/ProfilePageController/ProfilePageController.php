@@ -8,6 +8,7 @@
 namespace Controller\ProfilePageController;
 
 use Controller\BaseController\BaseController;
+use \Vendor\Util\Util;
 
 class ProfilePageController extends BaseController{
     public function getViewUri() {
@@ -18,30 +19,41 @@ class ProfilePageController extends BaseController{
 
     public function __invoke()
     {
+        $userId = Util::getSessionVar('userId') ?? Util::getCookieVar('userId');
+        $user = new \Model\User\User();
+        $userInfo = $user->getUser($userId);
+        $prize = new \Model\Prize\Prize();
+        $userPrizes = $prize->getUserPrizeList($userId);
+        $prizeAmount = [];
+        for ($i = 0; $i <= 3; $i++) {
+            //var_dump($userPrizes[$i]['type']);
+            $prizeAmount[$i+1] = $userPrizes[$i]['count'] ?? 0;
+        }
+        //$activePrizes = $prize->getActivePrizes();
         $viewContainer = [
             'user' => [
-                'login' => 'varezzz1',
-                'money' => 0,
-                'bonus_balls' => 0,
+                'login' => $userInfo["login"],
+                'money' => $userInfo["money"],
+                'bonus_balls' => $userInfo["bonus_balls"],
                 'prizes' => [
                     'prize1' => [
                         'name' => 'House',
-                        'amount' => 0,
+                        'amount' => $prizeAmount[1],
                         'img' => 'img/gift2.png',
                     ],
                     'prize2' => [
                         'name' => 'Car',
-                        'amount' => 0,
+                        'amount' => $prizeAmount[2],
                         'img' => 'img/gift1.png',
                     ],
                     'prize3' => [
                         'name' => 'Smartphone',
-                        'amount' => 0,
+                        'amount' => $prizeAmount[3],
                         'img' => 'img/gift3.png',
                     ],
                     'prize4' => [
                         'name' => 'Kick scooter',
-                        'amount' => 0,
+                        'amount' => $prizeAmount[4],
                         'img' => 'img/gift4.png',
                     ],
                 ],

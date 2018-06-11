@@ -9,12 +9,29 @@
 namespace Vendor\Util;
 
 class Util {
+    public static function getSessionVar(string $key) {
+        if ($key != '') {
+            session_start();
+            return $_SESSION[$key];
+        } else {
+            throw new Exception('Error: getSessionVar - key is empty');
+        }
+    }
+
     public static function setSessionVar(string $key, $value) {
         if ($key != '') {
             session_start();
             $_SESSION[$key] = $value;
         } else {
             throw new Exception('Error: setSessionVar - key is empty');
+        }
+    }
+
+    public static function getCookieVar(string $key) {
+        if ($key != '') {
+            return $_COOKIE[$key];
+        } else {
+            throw new Exception('Error: getSessionVar - key is empty');
         }
     }
 }

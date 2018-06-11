@@ -34,6 +34,7 @@ class Authentification {
         $this->password = $authFormData['password'];
         $auth = new \Model\Authentification\Authentification;
         $user = $auth->getUser($this->login, self::passwordSetHash($this->password));
+        $this->id = $user['id'];
         if ($user != false && $user['id'] != null) {
             self::saveUserSession();
             self::createSessionCookie();
@@ -57,11 +58,14 @@ class Authentification {
     }
 
     public function checkAuthorize() {
+        //Проверка на то авторизован ли пользователь. Вызывается при любом вызове защищённой страницы
         $auth = new \Model\Authentification\Authentification;
         if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
+            $this->id = $_SESSION['userId'];
             $this->login = $_SESSION['login'];
             $this->password = $_SESSION['password'];
         } elseif (isset($_COOKIE["login"]) && isset($_COOKIE["password"])) {
+            $this->id = $_COOKIE['userId'];
             $this->login = $_COOKIE['login'];
             $this->password = $_COOKIE['password'];
         }
