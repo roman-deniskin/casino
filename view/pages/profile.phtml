@@ -1,35 +1,19 @@
+<?php
+    $viewContainer = $_SESSION['viewContainer'];
+?>
 <div class="profile_content">
 	<div class="title_gifts">Jackpots:</div>
 	<div class="gifts_wrapper">
 		<div class="gifts_list clearfix">
+            <?php foreach ($viewContainer['casino']['prizes'] as $prize) : ?>
 			<div class="gift_item">
-				<div class="count">1</div>
+				<div class="count"><?= $prize['amount'] ?></div>
 				<div class="gift_item_img_wr">
-					<img class="gift_img" src="img/gift2.png" alt="" title="">
+					<img class="gift_img" src="<?= $prize['img'] ?>" alt="" title="">
 				</div>
-				<div class="gift_item_name">House</div>
+				<div class="gift_item_name"><?= $prize['name'] ?></div>
 			</div>
-			<div class="gift_item">
-				<div class="count">10</div>
-				<div class="gift_item_img_wr">
-					<img class="gift_img" src="img/gift1.png" alt="" title="">
-				</div>
-				<div class="gift_item_name">Car</div>
-			</div>
-			<div class="gift_item">
-				<div class="count">50</div>
-				<div class="gift_item_img_wr">
-					<img class="gift_img" src="img/gift3.png" alt="" title="">
-				</div>
-				<div class="gift_item_name">Smartphone</div>
-			</div>
-			<div class="gift_item">
-				<div class="count">100</div>
-				<div class="gift_item_img_wr">
-					<img class="gift_img" src="img/gift4.png" alt="" title="">
-				</div>
-				<div class="gift_item_name">Kick scooter</div>
-			</div>
+            <?php endforeach; ?>
 		</div>
 	</div>
 	<div class="profile_info_wrapper">
@@ -42,47 +26,28 @@
 	<div class="get_gift_wrapper">
 		<a class="get_gift_btn" href="">Get prize</a>
 	</div>
-	<div class="title_gifts"><?= $login ?> prizes:</div>
+	<div class="title_gifts"><?= ucfirst($viewContainer['user']['login']) ?> prizes:</div>
 	<div class="gifts_wrapper">
 		<div class="gifts_list clearfix">
-			<div class="gift_item">
-				<div class="count">0</div>
-				<div class="gift_item_img_wr">
-					<img class="gift_img" src="img/gift2.png" alt="" title="">
-				</div>
-				<div class="gift_item_name">House</div>
-			</div>
-			<div class="gift_item">
-				<div class="count">0</div>
-				<div class="gift_item_img_wr">
-					<img class="gift_img" src="img/gift1.png" alt="" title="">
-				</div>
-				<div class="gift_item_name">Car</div>
-			</div>
-			<div class="gift_item">
-				<div class="count">0</div>
-				<div class="gift_item_img_wr">
-					<img class="gift_img" src="img/gift3.png" alt="" title="">
-				</div>
-				<div class="gift_item_name">Smartphone</div>
-			</div>
-			<div class="gift_item">
-				<div class="count">0</div>
-				<div class="gift_item_img_wr">
-					<img class="gift_img" src="img/gift4.png" alt="" title="">
-				</div>
-				<div class="gift_item_name">Kick scooter</div>
-			</div>
+            <?php foreach ($viewContainer['user']['prizes'] as $prize) : ?>
+                <div class="gift_item">
+                    <div class="count"><?= $prize['amount'] ?></div>
+                    <div class="gift_item_img_wr">
+                        <img class="gift_img" src="<?= $prize['img'] ?>" alt="" title="">
+                    </div>
+                    <div class="gift_item_name"><?= $prize['name'] ?></div>
+                </div>
+            <?php endforeach; ?>
 		</div>
 	</div>
 	<div class="profile_info_wrapper">
 		<div class="profile_info_str clearfix">
-			<div class="profile_info_left"><?= $login ?> balance:</div>
-			<div class="profile_info_right"><?= $userMoney ?> Kč</div>
+			<div class="profile_info_left"><?= ucfirst($viewContainer['user']['login']) ?> balance:</div>
+			<div class="profile_info_right"><?= $viewContainer['user']['money'] ?> Kč</div>
 		</div>
 		<div class="profile_info_str clearfix">
-			<div class="profile_info_left"><?= $login ?> balance:</div>
-			<div class="profile_info_right"><?= $userBonusBalls ?> bonus balls</div>
+			<div class="profile_info_left"><?= ucfirst($viewContainer['user']['login']) ?> balance:</div>
+			<div class="profile_info_right"><?= $viewContainer['user']['bonus_balls'] ?> bonus balls</div>
 		</div>
 	</div>
 </div>
