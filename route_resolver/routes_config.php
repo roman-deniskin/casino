@@ -23,6 +23,9 @@ class Routes_config
         '/logout' => [
             'controller' => \Controller\AuthController\LogoutController::class,
         ],
+        '/get-prize' => [
+            'controller' => \Controller\PrizesController\PrizesController::class,
+        ],
     ];
 
     public function getPageConfig($requestUri = null)

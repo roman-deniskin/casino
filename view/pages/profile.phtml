@@ -19,7 +19,7 @@
 	<div class="profile_info_wrapper">
 		<div class="profile_info_str clearfix">
 			<div class="profile_info_left">Total jackpot money:</div>
-			<div class="profile_info_right">1000000 Kč</div>
+			<div class="profile_info_right"><?= $viewContainer['casino']['money'] ?> Kč</div>
 		</div>
 	</div>
     <div class="profile_line"></div>
@@ -48,6 +48,15 @@
 		</div>
 	</div>
     <div class="get_gift_wrapper">
-        <a class="get_gift_btn" href="">Get prize</a>
+        <a class="get_gift_btn" id="get_prize">Get prize</a>
     </div>
+    <?php if ($viewContainer['user']['unconfirmed_prize']) : ?>
+    <div class="modal_wnd_wrapper">
+        <div class="modal_wnd">
+            <h3>You have unconfirmed prizes!</h3>
+            <p>Congratulations! You won the <?= $viewContainer['user']['unconfirmed_prize'] ?>! Do you want us to send it to you?</p>
+            <div class="btn_wrapper"><a class="get_gift_btn" href="/">YES!</a><a class="get_gift_btn" href="">No, thanks.</a></div>
+        </div>
+    </div>
+    <?php endif; ?>
 </div>

@@ -8,6 +8,7 @@
 namespace Controller\PrizesController;
 
 use Controller\BaseController\BaseController;
+use Controller\ProfilePageController\ProfilePageDataStructure;
 
 class PrizesController extends BaseController{
     public function getViewUri() {
@@ -15,7 +16,8 @@ class PrizesController extends BaseController{
 
     public function __invoke()
     {
-        $data = [];
+        //TODO: Тут должен случаться вызов механизма разыгрывающего призы
+        $data = ProfilePageDataStructure::getProfilePageData();
         header('Content-Type: application/json');
         echo json_encode($data);
         exit;

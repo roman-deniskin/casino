@@ -45,8 +45,8 @@ class Route_resolver {
         self::routeResolve($routeParams);
     }
 	
-	public static function setLayout($layout) {
-        self::$layout ? $layout : '../view/layout.php';
+	public static function getLayout($layout = null) {
+        return (self::$layout != null) ? $layout : '../view/layout.php';
 	}
 
     public function getPageContent() {
@@ -54,8 +54,9 @@ class Route_resolver {
     }
 
     public static function renderer() {
-        $vm = require_once '../view/layout.php';
-        //require_once self::$viewModel['viewUri'];
+        $vm = '';
+        self::$layout = self::getLayout();
+        $vm = require_once self::$layout;
         echo $vm;
     }
 }

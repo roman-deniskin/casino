@@ -493,5 +493,39 @@ margin-bottom: 70px;
 background: #5d5d5d;
 }
 
+.modal_wnd_wrapper {
+  width: 100%;
+  position: fixed;
+  height: 100vh;
+  background: #ffffffba;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.modal_wnd {
+  position: relative;
+  width: 40%;
+  background: #1471c2;
+  color: #FFF;
+  padding: 20px;
+  text-align: center;
+  max-height: 300px;
+  height: 20vh;
+}
 
+.modal_wnd h3 {
+  font-size: 2em;
+}
+
+.modal_wnd p {
+  font-size: 1.4em;
+}
+
+.btn_wrapper {
+  display: flex;
+  justify-content: space-around;
+}
