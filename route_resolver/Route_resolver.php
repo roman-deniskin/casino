@@ -8,8 +8,12 @@ class Route_resolver {
     static private $projectPageConfig = [];
     static private $routeParams;
     static private $layout;
+    static private $notFoundPage;
+    static private $layoutWrapper;
 
 	public function __construct() {
+        self::$notFoundPage = '../view/pages/404.phtml';
+        self::$layoutWrapper = '../view/layout.phtml';
 		self::$requestUri = $_SERVER['REQUEST_URI'];
 		self::$projectPageConfig = new Routes_config;
         self::routeResolve();
@@ -22,8 +26,9 @@ class Route_resolver {
             self::$routeParams = $routeParams;
         }
         if (empty(self::$routeParams)) {
+            //Здесь вызывается страница 404
 			self::$routeParams = [
-				'viewUri' => '../view/pages/404.phtml'
+				'viewUri' => self::$notFoundPage
 			];
 		} elseif (array_key_exists ('controller', self::$routeParams)) {
             if (!array_key_exists('method', self::$routeParams))
@@ -46,20 +51,18 @@ class Route_resolver {
     }
 	
 	public static function getLayout($layout = null) {
-        return (self::$layout != null) ? $layout : '../view/layout.php';
+        self::$layout = (self::$layout != null) ? $layout : self::$layoutWrapper;
+        return self::$layout;
 	}
 
     public function getPageContent() {
-        return require_once self::$routeParams['viewUri'];
+        require_once self::$routeParams['viewUri'];
     }
 
     public static function renderer() {
-        $vm = '';
         self::$layout = self::getLayout();
-        $vm = require_once self::$layout;
-        echo $vm;
+        require_once self::$layout;
     }
 }
 
 $vm = new Route_resolver();
-$vm->renderer();

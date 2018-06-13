@@ -4,10 +4,10 @@
 <div class="profile_content">
 	<div class="title_gifts">Jackpots:</div>
 	<div class="gifts_wrapper">
-		<div class="gifts_list clearfix">
-            <?php foreach ($viewContainer['casino']['prizes'] as $prize) : ?>
-			<div class="gift_item">
-				<div class="count"><?= $prize['amount'] ?></div>
+		<div class="gifts_list clearfix casino">
+            <?php foreach ($viewContainer['casino']['prizes'] as $key => $prize) : ?>
+			<div class="gift_item casino">
+				<div class="amount <?= $key ?>"><?= $prize['amount'] ?></div>
 				<div class="gift_item_img_wr">
 					<img class="gift_img" src="<?= $prize['img'] ?>" alt="" title="">
 				</div>
@@ -19,16 +19,16 @@
 	<div class="profile_info_wrapper">
 		<div class="profile_info_str clearfix">
 			<div class="profile_info_left">Total jackpot money:</div>
-			<div class="profile_info_right"><?= $viewContainer['casino']['money'] ?> Kč</div>
+			<div class="profile_info_right casino_jackpot"><?= $viewContainer['casino']['money'] ?> Kč</div>
 		</div>
 	</div>
     <div class="profile_line"></div>
 	<div class="title_gifts"><?= ucfirst($viewContainer['user']['login']) ?> prizes:</div>
 	<div class="gifts_wrapper">
-		<div class="gifts_list clearfix">
-            <?php foreach ($viewContainer['user']['prizes'] as $prize) : ?>
+		<div class="gifts_list clearfix user">
+            <?php foreach ($viewContainer['user']['prizes'] as $key => $prize) : ?>
                 <div class="gift_item">
-                    <div class="count"><?= $prize['amount'] ?></div>
+                    <div class="amount <?= $key ?>"><?= $prize['amount'] ?></div>
                     <div class="gift_item_img_wr">
                         <img class="gift_img" src="<?= $prize['img'] ?>" alt="" title="">
                     </div>
@@ -40,11 +40,11 @@
 	<div class="profile_info_wrapper">
 		<div class="profile_info_str clearfix">
 			<div class="profile_info_left"><?= ucfirst($viewContainer['user']['login']) ?> balance:</div>
-			<div class="profile_info_right"><?= $viewContainer['user']['money'] ?> Kč</div>
+			<div class="profile_info_right user_money"><?= $viewContainer['user']['money'] ?> Kč</div>
 		</div>
 		<div class="profile_info_str clearfix">
 			<div class="profile_info_left"><?= ucfirst($viewContainer['user']['login']) ?> balance:</div>
-			<div class="profile_info_right"><?= $viewContainer['user']['bonus_balls'] ?> bonus balls</div>
+			<div class="profile_info_right user_bonus_balls"><?= $viewContainer['user']['bonus_balls'] ?> bonus balls</div>
 		</div>
 	</div>
     <div class="get_gift_wrapper">
