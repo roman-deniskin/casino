@@ -16,10 +16,8 @@ class ProfilePageController extends BaseController{
         ];
     }
 
-    public function __invoke()
+    public function __invoke($actionMethod = null)
     {
-        /* Дадее идёт некий код, который просто выводит текущие значения на страницу профиля. Логика тут не реализуется
-        и не должна как то влиять на базу. Просто настраиваем View */
         $viewContainer = ProfilePageDataStructure::getProfilePageData();
         \Vendor\Util\Util::setSessionVar('viewContainer', $viewContainer);
         return self::getViewUri();

@@ -19,9 +19,12 @@ class ProfilePageDataStructure {
         $user = new \Model\User\User();
         $userInfo = $user->getUser($userId);
         $prize = new \Model\Prize\Prize();
-        $userPrizeAmounts = $prize->getPrizeAmountList($userId);
+        $casino = new \Model\Casino\Casino();
+        $casinoMoney = $casino->getCasinoMoney();
+        $userPrizeAmounts = $prize->getPrizeAmountList();
         $casinoPrizeAmounts = $prize->getPrizeAmountList();
         $userPrizeNames = $prize->getPrizeNameList();
+        $possible_bonus_balls = \Controller\PrizesController\BonusBalls::showCourseMoneyToBonuses($userInfo["unconfirmed_money"]);
         $userPrizeAmount = [];
         $casinoPrizeAmount = [];
         $prizeName = [];
@@ -37,6 +40,8 @@ class ProfilePageDataStructure {
                 'login' => $userInfo["login"],
                 'money' => $userInfo["money"],
                 'bonus_balls' => $userInfo["bonus_balls"],
+                'unconfirmed_money' => $userInfo["unconfirmed_money"],
+                'possible_bonus_balls' => $possible_bonus_balls,
                 'prizes' => [
                     'prize1' => [
                         'name' => $prizeName[0],
@@ -65,7 +70,7 @@ class ProfilePageDataStructure {
                 ],
             ],
             'casino' => [
-                'money' => 1000000,
+                'money' => $casinoMoney,
                 'prizes' => [
                     'prize1' => [
                         'name' => $prizeName[0],
@@ -95,5 +100,11 @@ class ProfilePageDataStructure {
     public static function getProfilePageData() {
         self::dataSetter();
         return self::$viewContainer;
+    }
+
+    public static function getProfilePageDataJson() {
+        $data = ProfilePageDataStructure::getProfilePageData();
+        header('Content-Type: application/json');
+        echo json_encode($data);
     }
 }

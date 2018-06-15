@@ -21,10 +21,23 @@ class Routes_config
             'controller' => \Controller\AuthController\AuthController::class,
         ],
         '/logout' => [
-            'controller' => \Controller\AuthController\LogoutController::class,
+            'controller' => \Controller\AuthController\AuthController::class,
+            'action' => 'logOutAction',
         ],
         '/get-prize' => [
             'controller' => \Controller\PrizesController\PrizesController::class,
+        ],
+        '/get-prize/get-money' => [
+            'controller' => \Controller\PrizesController\PrizesController::class,
+            'action' => 'sendMoneyToBankAction',
+        ],
+        '/get-prize/get-bonus' => [
+            'controller' => \Controller\PrizesController\PrizesController::class,
+            'action' => 'getBonusBalls',
+        ],
+        '/get-prize/get-prize' => [
+            'controller' => \Controller\PrizesController\PrizesController::class,
+            'action' => 'getPrize',
         ],
     ];
 

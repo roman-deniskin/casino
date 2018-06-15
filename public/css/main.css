@@ -529,3 +529,13 @@ background: #5d5d5d;
   display: flex;
   justify-content: space-around;
 }
+
+.hidden {
+  display: none;
+}
+div[data-modalstate="hidden"] {
+    display: none;
+}
+div[data-modalstate="open"] {
+    display: flex;
+}

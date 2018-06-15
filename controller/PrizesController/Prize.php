@@ -2,51 +2,40 @@
 
 namespace Controller\PrizesController;
 
-class PrizeSet {
-    /*
-     * Объект PrizeSet содержит Набор призов пользователя или казино. Мы выбираем призы набором чтобы было удобнее
-     * отображать информацию о призах на странице . */
+use Controller\ProfilePageController\ProfilePageDataStructure;
+use Controller\PrizesController\BonusBalls;
 
-    private $prizeNamesSet;
-
-    public function __construct()
-    {
-        $this->prizeModel = new \Model\Prize\Prize();
-        $this->prizeNamesSet = $this->prizeModel->getPrizeAmountList();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function setPrizesNames()
-    {
-        $this->prizeNamesSet = $this->prizeModel->getPrizeNameList();
-    }
-}
-
-class Prize {
-    /*
-     * Объект Prize содержит экземпляр одного приза */
-    private $id;
-    private $amount;
-    private $name;
-    private $status;
-    private $prize;
+class Prize extends AbstractPrize {
+    
 
     public function __construct()
     {
-        $this->prizeSet = new \Model\Prize\PrizeSet();
+        parent::__construct();
     }
 
-    /**
-     * @return mixed
-     */
-    public function setPrizesNames()
-    {
-        return $userPrizesNames = $this->prize->getPrizeAmountList();
-    }
-
-    public function getUserPrizes($userId) {
-        $userPrizeAmounts = $this->prize->getPrizeAmountList($userId);
+    public function getPrize() {
+        $prizeListIds = [0, 1, 2, 3];//Список типов призов присутствующих в системе
+        for (;;) {
+            $prizeType = rand(0, 3);
+            if ($prizeListIds == []) {
+                //Массив пуст. Отправляем вместо приза бонусные баллы.
+                $bonuses = BonusBalls::showCoursePrizesToBonuses($prizeType);
+                $prizeImpl = new \Model\Prize\Prize;
+                $prizeImpl->addBonusBalls($bonuses);
+            }
+            if (empty($prizeListIds[$prizeType]))//Есть ли этот номер в списке призов
+                continue;
+            $prizeImpl = new \Model\Prize\Prize;
+            $prizeExist = $prizeImpl->checkPrize($prizeType);//Возвращает true если приз есть в Казино
+            if ($prizeExist == true) {
+                $prizeImpl->sendPrizeToUser($prizeType);
+                break;
+            } else {
+                //Приз не существует. Удаляем его из массива.
+                unset($prizeListIds[$prizeType]);
+            }
+        }
+        ProfilePageDataStructure::getProfilePageDataJson();
+        exit;
     }
 }

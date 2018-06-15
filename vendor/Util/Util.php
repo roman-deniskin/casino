@@ -34,4 +34,9 @@ class Util {
             throw new Exception('Error: getSessionVar - key is empty');
         }
     }
+
+    public static function getFullDomain() {
+        $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"],0,5))=='https'?'https':'http';
+        return $protocol.'://'.$_SERVER['SERVER_NAME'];
+    }
 }

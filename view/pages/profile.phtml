@@ -44,19 +44,24 @@
 		</div>
 		<div class="profile_info_str clearfix">
 			<div class="profile_info_left"><?= ucfirst($viewContainer['user']['login']) ?> balance:</div>
-			<div class="profile_info_right user_bonus_balls"><?= $viewContainer['user']['bonus_balls'] ?> bonus balls</div>
+			<div class="profile_info_right user_bonus_balls"><?= $viewContainer['user']['bonus_balls'] ?> bonus points</div>
 		</div>
 	</div>
     <div class="get_gift_wrapper">
         <a class="get_gift_btn" id="get_prize">Get prize</a>
     </div>
-    <?php if ($viewContainer['user']['unconfirmed_prize']) : ?>
-    <div class="modal_wnd_wrapper">
-        <div class="modal_wnd">
-            <h3>You have unconfirmed prizes!</h3>
-            <p>Congratulations! You won the <?= $viewContainer['user']['unconfirmed_prize'] ?>! Do you want us to send it to you?</p>
-            <div class="btn_wrapper"><a class="get_gift_btn" href="/">YES!</a><a class="get_gift_btn" href="">No, thanks.</a></div>
-        </div>
-    </div>
-    <?php endif; ?>
+		<div class="modal_wnd_wrapper unconfirmed_prize" data-modalstate="<?= $viewContainer['user']['unconfirmed_prize'] ? 'open': 'hidden';?>">
+			<div class="modal_wnd">
+				<h3>You have unconfirmed prizes!</h3>
+				<p>Congratulations! You won the <span class="unconfirmed_prize"><?= $viewContainer['user']['unconfirmed_prize'] ?></span>! Do you want us to send it to you?</p>
+				<div class="btn_wrapper"><a class="get_gift_btn" href="/">YES!</a><a class="get_gift_btn" href="">No, thanks.</a></div>
+			</div>
+		</div>
+		<div class="modal_wnd_wrapper unconfirmed_money" data-modalstate="<?= $viewContainer['user']['unconfirmed_prize'] ? 'open': 'hidden';?>">
+			<div class="modal_wnd">
+				<h3>You have unconfirmed prizes!</h3>
+				<p>Congratulations! You won <span class="unconfirmed_money"><?= $viewContainer['user']['unconfirmed_money'] ?></span> Kč! Do you want get it in your bank account? Also you can change it to bonuse points - <span class="possible_bonus_balls"><?= $viewContainer['user']['possible_bonus_balls'] ?></span>.</p>
+				<div class="btn_wrapper"><a class="get_gift_btn" id="sendMoneyToBank">YES!</a><a class="get_gift_btn" id="get_bonuses">No, get bonus points.</a></div>
+			</div>
+		</div>
 </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace Vendor\Db_connection;
+use Vendor\Util\Util;
 
 require_once "db.config.php";
 

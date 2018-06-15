@@ -31,8 +31,7 @@ class Route_resolver {
 				'viewUri' => self::$notFoundPage
 			];
 		} elseif (array_key_exists ('controller', self::$routeParams)) {
-            if (!array_key_exists('method', self::$routeParams))
-                self::callController(self::$routeParams['controller']);
+            self::callController(self::$routeParams['controller'], self::$routeParams['action']);
         }
         $auth = new \Vendor\Authentification\Authentification;
         $userAuth = $auth->checkAuthorize();
@@ -41,12 +40,9 @@ class Route_resolver {
         }
 	}
     
-    public static function callController(/*BaseController*/ $controller = null) {
-        if ($controller == null)
-            $controllerInstance = new self::$routeParams['controller']();//Каждый контроллер возвращает ViewConfig
-        else
-            $controllerInstance = new $controller();
-        $routeParams = $controllerInstance();
+    public static function callController(/*BaseController*/ $controller = null, $actionMethod = null) {
+        $controllerInstance = new self::$routeParams['controller'] ?: new $controller;//Каждый контроллер возвращает ViewConfig
+        $routeParams = $controllerInstance($actionMethod);
         self::routeResolve($routeParams);
     }
 	
