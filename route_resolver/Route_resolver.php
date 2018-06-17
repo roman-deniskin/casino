@@ -1,8 +1,6 @@
 <?php
 namespace Route_resolver;
 
-use Controller\BaseController\BaseController;
-
 class Route_resolver {
 	static private $requestUri;
     static private $projectPageConfig = [];

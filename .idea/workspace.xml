@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9810c266-63f7-41c0-a606-6abd236d51cc" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/casino.sql" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/PrizesController/AbstractPrize.php" afterPath="$PROJECT_DIR$/controller/PrizesController/AbstractPrize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/PrizesController/BonusBalls.php" afterPath="$PROJECT_DIR$/controller/PrizesController/BonusBalls.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/PrizesController/Money.php" afterPath="$PROJECT_DIR$/controller/PrizesController/Money.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/PrizesController/Prize.php" afterPath="$PROJECT_DIR$/controller/PrizesController/Prize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/PrizesController/PrizesController.php" afterPath="$PROJECT_DIR$/controller/PrizesController/PrizesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/ProfilePageController/profilePageDataStructure.php" afterPath="$PROJECT_DIR$/controller/ProfilePageController/profilePageDataStructure.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Prize/Prize.php" afterPath="$PROJECT_DIR$/model/Prize/Prize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/main.css" afterPath="$PROJECT_DIR$/public/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/prize-getter.js" afterPath="$PROJECT_DIR$/public/js/prize-getter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/route_resolver/routes_config.php" afterPath="$PROJECT_DIR$/route_resolver/routes_config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/pages/profile.phtml" afterPath="$PROJECT_DIR$/view/pages/profile.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/route_resolver/Route_resolver.php" afterPath="$PROJECT_DIR$/route_resolver/Route_resolver.php" />
     </list>
     <ignored path="casino.loc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,19 +27,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="profile.phtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/pages/profile.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="71" column="252" selection-start-line="71" selection-start-column="252" selection-end-line="71" selection-end-column="252" />
-              <folding>
-                <marker date="1529159938813" expanded="true" signature="2441:2489" ph="..." />
-                <marker date="1529159938813" expanded="true" signature="3559:3685" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="profilePageDataStructure.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/ProfilePageController/profilePageDataStructure.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Route_resolver.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Route_resolver.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/route_resolver/Route_resolver.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="33" column="97" selection-start-line="33" selection-start-column="97" selection-end-line="33" selection-end-column="97" />
+            <state relative-caret-position="161">
+              <caret line="15" column="52" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -92,11 +67,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PrizesController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PrizesController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/PrizesController/PrizesController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="166">
               <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Bootstrap.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Bootstrap.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -219,7 +204,6 @@
         <option value="$PROJECT_DIR$/controller/baseController/baseController.php" />
         <option value="$PROJECT_DIR$/public/bank_api.php" />
         <option value="$PROJECT_DIR$/controller/authController/authController.php" />
-        <option value="$PROJECT_DIR$/route_resolver/Route_resolver.php" />
         <option value="$PROJECT_DIR$/vendor/db_connection/db_connection.php" />
         <option value="$PROJECT_DIR$/controller/PrizesController/Money.php" />
         <option value="$PROJECT_DIR$/vendor/Util/Util.php" />
@@ -235,6 +219,7 @@
         <option value="$PROJECT_DIR$/model/Prize/Prize.php" />
         <option value="$PROJECT_DIR$/controller/PrizesController/BonusBalls.php" />
         <option value="$PROJECT_DIR$/controller/PrizesController/PrizesController.php" />
+        <option value="$PROJECT_DIR$/route_resolver/Route_resolver.php" />
       </list>
     </option>
   </component>
@@ -623,12 +608,12 @@
       <workItem from="1528421288318" duration="20405000" />
       <workItem from="1528601333133" duration="81066000" />
       <workItem from="1528831154527" duration="34681000" />
-      <workItem from="1528968471028" duration="73888000" />
+      <workItem from="1528968471028" duration="74959000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220587000" />
+    <option name="totallyTimeSpent" value="221658000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -835,14 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bootstrap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/bank_api.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1017,14 +994,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/route_resolver/Route_resolver.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="33" column="97" selection-start-line="33" selection-start-column="97" selection-end-line="33" selection-end-column="97" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/route_resolver/routes_config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="314">
@@ -1096,6 +1065,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/route_resolver/Route_resolver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="15" column="52" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="52" />
           <folding />
         </state>
       </provider>
