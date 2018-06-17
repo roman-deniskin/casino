@@ -10,6 +10,7 @@ class Money extends AbstractPrize{
         $moneyImpl = new \Model\Prize\Prize;
         $casinoTransaction = $moneyImpl->getCasinoMoney($money);
         if ($casinoTransaction == true) {
+            $this->saveLastGameType(2);
             $moneyImpl->addUserMoney($money);
         } else {
             $bonusImpl = new \Controller\PrizesController\BonusBalls;

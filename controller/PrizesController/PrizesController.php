@@ -9,6 +9,7 @@ namespace Controller\PrizesController;
 
 use Controller\BaseController\BaseController;
 use Controller\ProfilePageController\ProfilePageDataStructure;
+use Model\Prize\Prize;
 use Vendor\Util\Util;
 
 class PrizesController extends BaseController{
@@ -16,7 +17,7 @@ class PrizesController extends BaseController{
     private $prizeType = [];
 
     private function prizeClassTypeRandomize() {
-        $randomNum = rand(3,3);
+        $randomNum = rand(1,3);//Здесь устанавливается тип игры.
         $this->prizeType = [
             1 => 'BonusBalls',
             2 => 'Money',
@@ -31,6 +32,25 @@ class PrizesController extends BaseController{
     }
 
     public function getViewUri() {
+        ProfilePageDataStructure::getProfilePageDataJson();
+        exit;
+    }
+
+    public function sendPrize() {
+        $prizeImpl = new \Model\Prize\Prize();
+        $prizeImpl->sendPrize();
+        ProfilePageDataStructure::getProfilePageDataJson();
+        exit;
+    }
+
+    public function changePrizeToBalls() {
+        $prizeImpl = new \Model\Prize\Prize();
+        $prize = new \Model\Prize\Prize();
+        $unconfirmedPrize = $prize->checkLastUnconfirmedPrize();
+        $bonuses = BonusBalls::showCoursePrizesToBonuses($unconfirmedPrize['type']);
+        $prizeImpl->changePrize($bonuses);
+        ProfilePageDataStructure::getProfilePageDataJson();
+        exit;
     }
 
     public function getPrize() {
@@ -67,6 +87,8 @@ class PrizesController extends BaseController{
 
     public static function getBonusBalls() {
         $bonusImpl = new \Controller\PrizesController\BonusBalls;
+        ProfilePageDataStructure::getProfilePageDataJson();
+        exit;
     }
 
     public function __invoke($actionMethod = null)

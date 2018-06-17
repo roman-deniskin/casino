@@ -39,6 +39,18 @@ class Routes_config
             'controller' => \Controller\PrizesController\PrizesController::class,
             'action' => 'getPrize',
         ],
+        '/get-prize/get-info' => [
+            'controller' => \Controller\PrizesController\PrizesController::class,
+            'action' => 'getViewUri',
+        ],
+        '/get-prize/send-prize' => [
+            'controller' => \Controller\PrizesController\PrizesController::class,
+            'action' => 'sendPrize',
+        ],
+        '/get-prize/change-prize' => [
+            'controller' => \Controller\PrizesController\PrizesController::class,
+            'action' => 'changePrizeToBalls',
+        ],
     ];
 
     public function getPageConfig($requestUri = null)

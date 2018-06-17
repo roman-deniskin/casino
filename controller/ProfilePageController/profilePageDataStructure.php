@@ -19,12 +19,19 @@ class ProfilePageDataStructure {
         $user = new \Model\User\User();
         $userInfo = $user->getUser($userId);
         $prize = new \Model\Prize\Prize();
+        $gameType = Util::getSessionVar('lastGameType') ?? -1;
+        if ($gameType == 3)//Проверяем, был ли разыгран приз в последней игре
+            $lastPrize = Util::getSessionVar('lastPrize') ?? -1;
+        else
+            $lastPrize = -1;
         $casino = new \Model\Casino\Casino();
         $casinoMoney = $casino->getCasinoMoney();
-        $userPrizeAmounts = $prize->getPrizeAmountList();
-        $casinoPrizeAmounts = $prize->getPrizeAmountList();
+        $userPrizeAmounts = $prize->getPrizeAmountList($userId);
+        $casinoPrizeAmounts = $prize->getPrizeAmountList(0);
         $userPrizeNames = $prize->getPrizeNameList();
-        $possible_bonus_balls = \Controller\PrizesController\BonusBalls::showCourseMoneyToBonuses($userInfo["unconfirmed_money"]);
+        $unconfirmedPrize = $prize->checkLastUnconfirmedPrize();
+        $moneyToBonuses = \Controller\PrizesController\BonusBalls::showCourseMoneyToBonuses($userInfo["unconfirmed_money"]);
+        $prizeToBonuses = \Controller\PrizesController\BonusBalls::showCoursePrizesToBonuses($unconfirmedPrize['type']);
         $userPrizeAmount = [];
         $casinoPrizeAmount = [];
         $prizeName = [];
@@ -41,7 +48,18 @@ class ProfilePageDataStructure {
                 'money' => $userInfo["money"],
                 'bonus_balls' => $userInfo["bonus_balls"],
                 'unconfirmed_money' => $userInfo["unconfirmed_money"],
-                'possible_bonus_balls' => $possible_bonus_balls,
+                'money_to_bonuses' => $moneyToBonuses,
+                'prize_to_bonuses' => $prizeToBonuses,
+                'unconfirmed_prize' => [
+                    'id' => $unconfirmedPrize['id'],
+                    'name' => $unconfirmedPrize['name'],
+                    'type' => $unconfirmedPrize['type'],
+                    'is_confirmed' => $unconfirmedPrize['is_confirmed'],
+                ],
+                'last_game' => [
+                    'game_type' => $gameType,
+                    'prize' => $lastPrize,
+                ],
                 'prizes' => [
                     'prize1' => [
                         'name' => $prizeName[0],
@@ -92,7 +110,7 @@ class ProfilePageDataStructure {
                         'amount' => $casinoPrizeAmount[3],
                         'img' => 'img/gift4.png',
                     ],
-                ]
+                ],
             ],
         ];
     }

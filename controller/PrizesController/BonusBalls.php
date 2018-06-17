@@ -38,25 +38,26 @@ class BonusBalls extends AbstractPrize{
     }
 
     public static function showCoursePrizesToBonuses($prizeType) {
-        $coefficient = 0;
+        $bonuses = 0;
         switch ($prizeType) {
-            case 0:
+            case 1:
                 $bonuses = 1000000000;
                 break;
-            case 1:
+            case 2:
                 $bonuses = 10000000;
                 break;
-            case 2:
+            case 3:
                 $bonuses = 100000;
                 break;
-            case 3:
+            case 4:
                 $bonuses = 50000;
                 break;
         }
-        return $coefficient;
+        return $bonuses;
     }
 
     public function changeMoneyToBonuses($money) {
+        $this->saveLastGame(1);
         $bonuses = self::showCourseMoneyToBonuses($money);
         $prizeImpl = new \Model\Prize\Prize;
         $prizeImpl->addBonusBalls($bonuses);

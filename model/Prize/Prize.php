@@ -11,9 +11,9 @@ class Prize extends \Vendor\Db_connection\Db_connection {
         self::$userId = Util::getSessionVar('userId') ?: Util::getCookieVar('userId');
     }
 
-    public function getPrizeAmountList()
+    public function getPrizeAmountList($userId)
     {
-        $query = "SELECT `type`, COUNT(`id`) AS `count` from `prizes` WHERE `userId` = " . self::$userId . " GROUP BY `type`";
+        $query = "SELECT `type`, COUNT(`id`) AS `count` from `prizes` WHERE `userId` = " . $userId . " GROUP BY `type`";
         $query = $this->dbh->prepare($query);
         if ($query != false)
             $query->execute();
@@ -54,6 +54,10 @@ class Prize extends \Vendor\Db_connection\Db_connection {
             $query->execute();
         else
             return false;
+        $query = "UPDATE `user` SET `unconfirmed_money`= 0 WHERE `id`=" . self::$userId;
+        $query = $this->dbh->prepare($query);
+        if ($query != false)
+            $query->execute();
         return true;
     }
 
@@ -87,7 +91,6 @@ class Prize extends \Vendor\Db_connection\Db_connection {
     }
 
     public function deleteUnconfirmedMoney() {
-        /* Возвращает false - если запрос по каким то причинам не был выполнен. Если всё прошло успешно - true */
         if (self::$userId  == null)
             throw new \Exception("Model Prize - addUserRealMoney. Error: userId is empty!");
         $query = "SELECT `unconfirmed_money` FROM `user` WHERE `id`=" . self::$userId;
@@ -104,7 +107,19 @@ class Prize extends \Vendor\Db_connection\Db_connection {
     }
 
     public function checkPrize($prizeType) {
-        $query = "SELECT `type` FROM `prizes` WHERE `id`=0";//Нулевые id принадлежат Казино
+        $query = "SELECT `type` FROM `prizes` WHERE `userId`=0 AND `type` = $prizeType";//Нулевые id принадлежат Казино
+        $query = $this->dbh->prepare($query);
+        $query->execute();
+        $query->bindColumn(1, $resultPrizeType);
+        while ($row = $query->fetch(\PDO::FETCH_BOUND)) {
+            $resultPrizeType = $resultPrizeType;
+        }
+        return $resultPrizeType;
+    }
+
+    public function sendPrizeToUser($prizeType) {
+        $this->checkPrize($prizeType);
+        $query = "UPDATE `prizes` SET `userId` = " . self::$userId . " WHERE `userId` = 0 AND `type` = " . $prizeType . " LIMIT 1";
         $query = $this->dbh->prepare($query);
         $query->execute();
         $query->bindColumn(1, $prizeType);
@@ -114,15 +129,27 @@ class Prize extends \Vendor\Db_connection\Db_connection {
         return $prizeType;
     }
 
-    public function sendPrizeToUser($prizeType) {
-        $this->checkPrize($prizeType);
-        $query = "UPDATE `prizes` SET `userId` = " . self::$userId . " WHERE `userId` = 0 AND `type` = " . $prizeType . " LIMIT 1";//Нулевые id принадлежат Казино
+    public function checkLastUnconfirmedPrize() {
+        $query = "SELECT `id`, `type`, `name`, `is_confirmed` FROM `prizes` WHERE `userId`=" . self::$userId . " AND `is_confirmed` = 0 LIMIT 1";
         $query = $this->dbh->prepare($query);
         $query->execute();
-        $query->bindColumn(1, $prizeType);
-        while ($row = $query->fetch(\PDO::FETCH_BOUND)) {
-            $prizeType = $prizeType;
-        }
-        return $prizeType;
+        $unconfirmedPrize = $query->fetch();
+        $unconfirmedPrize = ['id' => $unconfirmedPrize['id'], 'name' => $unconfirmedPrize['name'], 'type' => $unconfirmedPrize['type'], 'is_confirmed'=>$unconfirmedPrize['is_confirmed']];
+        return $unconfirmedPrize;
+    }
+
+    public function sendPrize() {
+        $query = "UPDATE `prizes` SET `is_confirmed` = 1 WHERE `userId` = " . self::$userId . " AND `is_confirmed` = 0 LIMIT 1";
+        $query = $this->dbh->prepare($query);
+        $query->execute();
+    }
+
+    public function changePrize($bonuses) {
+        $query = "UPDATE `prizes` SET `userId` = 0 WHERE `userId` = " . self::$userId . " AND `is_confirmed` = 0 LIMIT 1";
+        $query = $this->dbh->prepare($query);
+        $query->execute();
+        $query = "UPDATE `user` SET `bonus_balls` = `bonus_balls` + {$bonuses} WHERE `id` = " . self::$userId;
+        $query = $this->dbh->prepare($query);
+        $query->execute();
     }
 }

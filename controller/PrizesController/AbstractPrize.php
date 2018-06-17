@@ -10,4 +10,13 @@ class AbstractPrize {
     {
         $this->userId = Util::getSessionVar('userId') ?: Util::getCookieVar('userId');
     }
+    
+    public function saveLastGameType($lastGameType)
+    {
+        \Vendor\Util\Util::setSessionVar('lastGameType', $lastGameType);
+    }
+
+    public function saveLastPrize($lastPrizeType) {
+        \Vendor\Util\Util::setSessionVar('lastPrize', $lastPrizeType);
+    }
 }

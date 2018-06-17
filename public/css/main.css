@@ -326,7 +326,7 @@ color: #9c9c9c;
 text-decoration: none;
 transition-property: text-decoration-color, color;
 transition-duration: 400ms;
--webkit-transition: text-decoration-color 400ms, color 400ms; d
+-webkit-transition: text-decoration-color 400ms, color 400ms;
 }
 .social_networks_a:hover .social_networks_i
 {
@@ -513,8 +513,7 @@ background: #5d5d5d;
   color: #FFF;
   padding: 20px;
   text-align: center;
-  max-height: 300px;
-  height: 20vh;
+  max-height: 350px;
 }
 
 .modal_wnd h3 {
@@ -538,4 +537,7 @@ div[data-modalstate="hidden"] {
 }
 div[data-modalstate="open"] {
     display: flex;
+}
+.modal_wnd_img img {
+    height: 200px;
 }

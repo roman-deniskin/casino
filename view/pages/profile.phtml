@@ -50,17 +50,34 @@
     <div class="get_gift_wrapper">
         <a class="get_gift_btn" id="get_prize">Get prize</a>
     </div>
-		<div class="modal_wnd_wrapper unconfirmed_prize" data-modalstate="<?= $viewContainer['user']['unconfirmed_prize'] ? 'open': 'hidden';?>">
+		<div class="modal_wnd_wrapper unconfirmed_prize" data-modalstate="<?php echo isset($viewContainer['user']['unconfirmed_prize']['id']) ? 'open': 'hidden';?>">
 			<div class="modal_wnd">
+				<?php
+					$prizes = [
+						0 => [
+							'img' => 'img/gift2.png'
+						],
+						1 => [
+							'img' => 'img/gift1.png'
+						],
+						2 => [
+							'img' => 'img/gift3.png'
+						],
+						3 => [
+							'img' => 'img/gift4.png'
+						],
+					];
+				?>
 				<h3>You have unconfirmed prizes!</h3>
-				<p>Congratulations! You won the <span class="unconfirmed_prize"><?= $viewContainer['user']['unconfirmed_prize'] ?></span>! Do you want us to send it to you?</p>
-				<div class="btn_wrapper"><a class="get_gift_btn" href="/">YES!</a><a class="get_gift_btn" href="">No, thanks.</a></div>
+				<p>Congratulations! You won the <span class="unconfirmed_prize"><?= $viewContainer['user']['unconfirmed_prize']['name'] ?></span>! Do you want us to send it to you? Also you can change it to bonuse points - <span class="prize_to_bonuses"><?= $viewContainer['user']['prize_to_bonuses'] ?></span>.</p>
+				<div class="modal_wnd_img"><img src="<?= $prizes[$viewContainer['user']['unconfirmed_prize']['id']]['img'] ?>" alt="<?= $viewContainer['user']['unconfirmed_prize']['name'] ?>"></div>
+				<div class="btn_wrapper"><a class="get_gift_btn" id="send_prize">YES!</a><a class="get_gift_btn" id="reject_prize">No, thanks.</a></div>
 			</div>
 		</div>
-		<div class="modal_wnd_wrapper unconfirmed_money" data-modalstate="<?= $viewContainer['user']['unconfirmed_prize'] ? 'open': 'hidden';?>">
+		<div class="modal_wnd_wrapper unconfirmed_money" data-modalstate="<?= $viewContainer['user']['unconfirmed_money'] ? 'open': 'hidden';?>">
 			<div class="modal_wnd">
 				<h3>You have unconfirmed prizes!</h3>
-				<p>Congratulations! You won <span class="unconfirmed_money"><?= $viewContainer['user']['unconfirmed_money'] ?></span> Kč! Do you want get it in your bank account? Also you can change it to bonuse points - <span class="possible_bonus_balls"><?= $viewContainer['user']['possible_bonus_balls'] ?></span>.</p>
+				<p>Congratulations! You won <span class="unconfirmed_money"><?= $viewContainer['user']['unconfirmed_money'] ?></span> Kč! Do you want get it in your bank account? Also you can change it to bonuse points - <span class="money_to_bonuses"><?= $viewContainer['user']['money_to_bonuses'] ?></span>.</p>
 				<div class="btn_wrapper"><a class="get_gift_btn" id="sendMoneyToBank">YES!</a><a class="get_gift_btn" id="get_bonuses">No, get bonus points.</a></div>
 			</div>
 		</div>
